@@ -1,0 +1,35 @@
+apiVersion: usp.waf.envoy/v1alpha1
+kind: WafEnvoyService
+metadata:
+  name: waf
+  namespace: juiceshop
+spec:
+  hostnames:
+    - {{.Values.hostnames.viaWaf}}:8080
+  websocket: True
+  crs:
+    mode: BLOCK
+    securityLevel: 5
+    paranoiaLevel: 4
+    requestBodyAccess: true
+    requestBodyLimit: 2147483646
+
+    parseXml: true
+    parseJson: true
+    validateJson: true
+    responseBodyLimit: 131072
+    enabledRequestRules: [911, 913, 921, 922, 930, 931, 932, 933, 934, 941, 942, 943, 944]
+    requestRuleExceptions:
+      - ruleId: 941160
+        requestPartType: ARGS_POST
+        requestPartName: json.email
+        location: /rest/user/login
+    #enabledResponseRules: [950, 951, 952, 953, 954, 955]
+    
+    
+  routes:
+    - match:
+        path: ^/.*
+      backend:
+        address: juice-shop
+        port: 8000

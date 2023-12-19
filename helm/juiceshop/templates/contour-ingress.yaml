@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: contour-ingress
+  namespace: juiceshop
+  annotations:
+    projectcontour.io/websocket-routes: /
+spec:
+  rules:
+    - host: {{.Values.hostnames.direct}}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: juice-shop
+                port:
+                  number: 8000
+
+    - host: {{.Values.hostnames.viaWaf}}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: usp-waf-envoy
+                port:
+                  number: 8080
