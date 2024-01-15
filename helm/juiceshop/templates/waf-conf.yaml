@@ -6,11 +6,12 @@ metadata:
 spec:
   hostnames:
     - {{.Values.hostnames.viaWaf}}:8080
+    - {{.Values.hostnames.viaWaf}}:8443
   websocket: True
   crs:
     mode: BLOCK
     securityLevel: 5
-    paranoiaLevel: 4
+    paranoiaLevel: 1
     requestBodyAccess: true
     requestBodyLimit: 2147483646
 
@@ -24,12 +25,34 @@ spec:
         requestPartType: ARGS_POST
         requestPartName: json.email
         location: /rest/user/login
-    #enabledResponseRules: [950, 951, 952, 953, 954, 955]
-    
+    enabledResponseRules: [950, 951, 952, 953, 954, 955]
     
   routes:
     - match:
-        path: ^/.*
+        path: "/"
+        pathType: "PREFIX"
       backend:
         address: juice-shop
         port: 8000
+      # auth:
+      #   ref: "myauth"
+  # authentication:
+  #   - name: "myauth"
+  #     issuer: "https://cloudses.online/login/sls"
+  #     authorizationEndpoint: "https://cloudses.online/login/sls/oidc-auth"
+  #     tokenEndpoint: "https://cloudses.online/login/sls/oidc-token"
+  #     tokenEndpointAuthType: "QUERY"
+  #     credentials:
+  #       clientId: "uwe-client"
+  #       clientSecretRef: "uwe-client-secret-ref"
+  #       hmacSecretRef: "uwe-hmac-secret-ref"
+  #     jwksEndpoint: "https://cloudses.online/login/sls/.well-known/openid-configuration/jwks"
+  #     scopes:
+  #       - "openid"
+
+  #     backend:
+  #       forwardJwt: true
+  #       jwtProcessingEndpoint: "https://ignored-so-far/"
+  #       jwtClaimToHeader:
+  #         - claim: "sub-ignored-so-far"
+  #           headerName: "x-user-ignored-so-far"

@@ -1,9 +1,10 @@
 hostnames:
 # direct: "juiceshop-127-0-0-1.nip.io"
 # viaWaf: "juiceshop-via-waf-127-0-0-1.nip.io"
+# wafAdmin: "waf-admin-127-0-0-1.nip.io"
   direct: "juiceshop-10-99-0-10.nip.io"
   viaWaf: "juiceshop-via-waf-10-99-0-10.nip.io"
-
+  wafAdmin: "waf-admin-10-99-0-10.nip.io"
 # # Default values for juiceshop.
 # # This is a YAML-formatted file.
 # # Declare variables to be passed into your templates.

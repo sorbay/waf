@@ -5,6 +5,7 @@ metadata:
   namespace: juiceshop
   annotations:
     projectcontour.io/websocket-routes: /
+    cert-manager.io/cluster-issuer: cert-issuer
 spec:
   rules:
     - host: {{.Values.hostnames.direct}}
@@ -28,3 +29,20 @@ spec:
                 name: usp-waf-envoy
                 port:
                   number: 8080
+    - host: {{.Values.hostnames.wafAdmin}}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: waf-admin-if
+                port:
+                  number: 8001
+  tls: # < placing a host in the TLS config will determine what ends up in the cert's subjectAltNames
+  - hosts:
+    - {{.Values.hostnames.direct}}
+    - {{.Values.hostnames.viaWaf}}
+    - {{.Values.hostnames.wafAdmin}}
+    # by convention name of ingress from above plus "-cert":
+    secretName: contour-ingress-cert # < cert-manager will store the created certificate in this secret.
