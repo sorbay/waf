@@ -427,6 +427,13 @@ spec:
                     credentials:
                       description: OIDC credentials (client_id and client_secret)
                       properties:
+                        hmacSecret:
+                          description: HMAC secret by value (exclusive with hmacSecret)
+                          type: string
+                        hmacSecretRef:
+                          description: HMAC secret via reference to Kubernetes secret
+                            (exclusive with hmacSecret)
+                          type: string
                         clientSecret:
                           description: OIDC client_secret by value (exclusive with
                             clientSecretRef)
@@ -500,15 +507,7 @@ spec:
             type: object
           status:
             properties:
-              deploymentName:
-                type: string
-              timestamp:
-                type: string
-              configMapName:
-                type: string
-              ingressName:
-                type: string
-              serviceName:
+              status:
                 type: string
             type: object
         type: object

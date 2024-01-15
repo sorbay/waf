@@ -53,7 +53,7 @@ spec:
           resources:
             requests:
               cpu: "0.1"
-              memory: "60M"
+              memory: "60Mi"
           volumeMounts:
             - mountPath: /etc/usp-waf/
               name: operator-config-volume

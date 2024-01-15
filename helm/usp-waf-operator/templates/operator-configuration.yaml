@@ -24,22 +24,37 @@ data:
     envoy:
 
       # Optional: Name of envoy container image
+      # Override per deployment with custom resource annotation "waf.u-s-p.ch/image"
       image: {{.Values.envoyImage}}
+
       # Optional: Name of envoy proxy pod(s)
+      # Override per deployment with custom resource annotation "waf.u-s-p.ch/pod-name"
       podName: "usp-waf-envoy"
+
+      # Optional: Number of pod replicas (defaults to 1)
+      # Override per deployment with custom resource annotation "waf.u-s-p.ch/replicas"
+      replicas: 1
+
       # Optional: Listener port of k8s service created by the operator for the envoy proxy
+      # Override per deployment with custom resource annotation "waf.u-s-p.ch/service-port"
       servicePort: 8080
+
       # Optional: Envoy proxy listener port (usually only needed if a custom image is used where envoy does not listen on 8080)
+      # Override per deployment with custom resource annotation "waf.u-s-p.ch/listener-port"
       listenerPort: 8080
 
       # Resources:
       resources:
         request:
-          cpu: "1"
-          memory: "700M"
-        # limits:
-        #   cpu: "2"
-        #   memory: "900M"
+          # Override per deployment with custom resource annotation "waf.u-s-p.ch/request-cpu"
+          cpu: "1.0"
+          # Override per deployment with custom resource annotation "waf.u-s-p.ch/request-memory"
+          memory: "300Mi"
+        limits:
+          # Override per deployment with custom resource annotation "waf.u-s-p.ch/limits-cpu"
+          cpu: "1500m"
+          # Override per deployment with custom resource annotation "waf.u-s-p.ch/limits-memory"
+          memory: "500Mi"
 
       geoIpProvider:
 
