@@ -1,5 +1,5 @@
 
-operatorVersion: 0.0.6
+operatorVersion: 0.0.9
 envoyImage: "quay.io/usp/usp-waf-envoy:1.0.5"
 
 
