@@ -19,6 +19,9 @@ data:
       namespaces:
       # Optional: If set to true, envoy will be deployed as an ingress proxy in the operators own namespace
       ingressMode: false
+      # Optional: name of ConfigMap which holds the CA truststore to be used by default (globally) in the pod.
+      # Override per deployment with custom resource annotation "waf.u-s-p.ch/custom-cacerts"
+      # caCertificatesConfigMapName: "ca-certificates"
 
     # Settings which affect the Envoy proxy deployments
     envoy:

@@ -1,6 +1,8 @@
 
-operatorVersion: 0.0.9
-envoyImage: "quay.io/usp/usp-waf-envoy:1.0.5"
+operatorVersion: 0.1.1
+envoyImage: "quay.io/usp/usp-waf-envoy:1.0.6"
+image:
+  registry: "quay.io/usp/usp-waf-envoy-operator"
 
 
 
