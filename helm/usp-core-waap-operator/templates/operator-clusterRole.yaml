@@ -1,13 +1,13 @@
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: waf-operator-role # should match roleRef/name in waf-operator-role-binding.yaml
-  namespace: uwe-operator
+  name: core-waap-operator-role # should match roleRef/name in core-waap-operator-role-binding.yaml
+  namespace: usp-core-waap-operator
 rules:
-  - apiGroups: ["usp.waf.envoy"]
+  - apiGroups: ["waap.core.u-s-p.ch"]
     resources:
-      - wafenvoyservices
-      - wafenvoyservices/status
+      - corewaapservices
+      - corewaapservices/status
       - pods
       - pods/exec
       - configmaps

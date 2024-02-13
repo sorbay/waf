@@ -1,12 +1,17 @@
-apiVersion: usp.waf.envoy/v1alpha1
-kind: WafEnvoyService
+apiVersion: waap.core.u-s-p.ch/v1alpha1
+kind: CoreWaapService
 metadata:
-  name: waf
+  name: core-waap
   namespace: juiceshop
+  annotations:
+    # for hot-restart to work it needs twice as much memory as
+    # for one instance
+    core.waap.u-s-p.ch/limits-memory: 1000Mi
+    #core.waap.u-s-p.ch/custom-cacerts: ca-certificates
 spec:
   hostnames:
-    - {{.Values.hostnames.viaWaf}}:8080
-    - {{.Values.hostnames.viaWaf}}:8443
+    - {{.Values.hostnames.viaCoreWaap}}:8080
+    - {{.Values.hostnames.viaCoreWaap}}:8443
   websocket: True
   crs:
     mode: BLOCK

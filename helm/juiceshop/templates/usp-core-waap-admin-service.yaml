@@ -1,12 +1,12 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: waf-admin-if
+  name: core-waap-admin-if
   namespace: juiceshop
 spec:
   type: NodePort
   selector:
-    app: usp-waf-envoy
+    app: usp-core-waap
   ports:
     - name: http
       port: 8001

@@ -19,30 +19,30 @@ spec:
                 port:
                   number: 8000
 
-    - host: {{.Values.hostnames.viaWaf}}
+    - host: {{.Values.hostnames.viaCoreWaap}}
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: usp-waf-envoy
+                name: usp-core-waap
                 port:
                   number: 8080
-    - host: {{.Values.hostnames.wafAdmin}}
+    - host: {{.Values.hostnames.coreWaapAdmin}}
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: waf-admin-if
+                name: core-waap-admin-if
                 port:
                   number: 8001
   tls: # < placing a host in the TLS config will determine what ends up in the cert's subjectAltNames
   - hosts:
     - {{.Values.hostnames.direct}}
-    - {{.Values.hostnames.viaWaf}}
-    - {{.Values.hostnames.wafAdmin}}
+    - {{.Values.hostnames.viaCoreWaap}}
+    - {{.Values.hostnames.coreWaapAdmin}}
     # by convention name of ingress from above plus "-cert":
     secretName: contour-ingress-cert # < cert-manager will store the created certificate in this secret.
