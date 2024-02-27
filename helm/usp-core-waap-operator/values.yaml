@@ -1,5 +1,5 @@
 
-operatorVersion: 0.2.0
+operatorVersion: 0.4.1
 envoyImage: "quay.io/usp/usp-core-waap:1.1.0"
 image:
   registry: "quay.io/usp/usp-core-waap-operator"
