@@ -19,6 +19,13 @@ data:
       namespaces:
       # Optional: If set to true, envoy will be deployed as an ingress proxy in the operators own namespace
       ingressMode: false
+      # Optional: name of ConfigMap which holds the CA truststore to be used by default (globally) in the pod.
+      # Override per deployment with custom resource annotation "core.waap.u-s-p.ch/custom-cacerts"
+      caCertificatesConfigMapName: "ca-certificates"
+      # Optional: name of key in ConfigMap which holds the CA truststore. The entry with that key name
+      # will be mapped to the "ca-certificates" file.
+      # Override per deployment with custom resource annotation "core.waap.u-s-p.ch/custom-cacerts-key"
+      # caCertificateKeyInConfigMap: "my-acme-cert"
 
     # Settings which affect the Envoy proxy deployments
     envoy:
@@ -28,8 +35,13 @@ data:
       image: {{.Values.envoyImage}}
 
       # Optional: Name of envoy proxy pod(s)
-      # Override per deployment with custom resource annotation "core.waap.u-s-p.ch/pod-name"
-      podName: "usp-core-waap"
+      # Override per deployment with custom resource annotation "core.waap.u-s-p.ch/name"
+      name: "usp-core-waap-abc"
+
+      # Optional: Additional label(s) for Envoy pods
+      # Must be comma- or blank-separated key/value pairs"
+      # Override per deployment with custom resource annotation "core.waap.u-s-p.ch/labels"
+      labels: "creator=usp logformat=json"
 
       # Optional: Number of pod replicas (defaults to 1)
       # Override per deployment with custom resource annotation "core.waap.u-s-p.ch/replicas"

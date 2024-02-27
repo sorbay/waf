@@ -465,6 +465,17 @@ spec:
                         port:
                           description: Host port
                           type: integer
+                        tls:
+                          description: TLS
+                          properties:
+                            checkCertificates:
+                              description: Check trusted certificates and SAN (default
+                                true)
+                              type: boolean
+                            enabled:
+                              description: Enable TLS (default false)
+                              type: boolean
+                          type: object
                         address:
                           description: Host address
                           type: string
