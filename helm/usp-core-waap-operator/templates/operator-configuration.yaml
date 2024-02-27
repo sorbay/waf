@@ -36,12 +36,12 @@ data:
 
       # Optional: Name of envoy proxy pod(s)
       # Override per deployment with custom resource annotation "core.waap.u-s-p.ch/name"
-      name: "usp-core-waap-abc"
+      #name: "usp-core-waap-abc"
 
       # Optional: Additional label(s) for Envoy pods
       # Must be comma- or blank-separated key/value pairs"
       # Override per deployment with custom resource annotation "core.waap.u-s-p.ch/labels"
-      labels: "creator=usp logformat=json"
+      #labels: "creator=usp logformat=json"
 
       # Optional: Number of pod replicas (defaults to 1)
       # Override per deployment with custom resource annotation "core.waap.u-s-p.ch/replicas"
