@@ -22,10 +22,12 @@ data:
       # Optional: name of ConfigMap which holds the CA truststore to be used by default (globally) in the pod.
       # Override per deployment with custom resource annotation "core.waap.u-s-p.ch/custom-cacerts"
       caCertificatesConfigMapName: "ca-certificates"
-      # Optional: name of key in ConfigMap which holds the CA truststore. The entry with that key name
-      # will be mapped to the "ca-certificates" file.
+      # Mandatory if caCertificatesConfigMapName is set:
+      # name of key in ConfigMap which holds the CA truststore. The entry with that key name
+      # will be mapped to the "ca-certificates.crt" file.
       # Override per deployment with custom resource annotation "core.waap.u-s-p.ch/custom-cacerts-key"
       # caCertificateKeyInConfigMap: "my-acme-cert"
+      caCertificateKeyInConfigMap: "ca-certificates.crt"
 
     # Settings which affect the Envoy proxy deployments
     envoy:

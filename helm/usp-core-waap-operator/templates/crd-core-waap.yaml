@@ -447,7 +447,7 @@ spec:
                       - BASIC
                       type: string
                     issuer:
-                      description: OIDC OP issuer
+                      description: OIDC OP issuer (optional if only using JWT validation)
                       type: string
                     jwksEndpoint:
                       description: "OIDC JWKS endpoint URL, offers credentials to\
@@ -517,6 +517,22 @@ spec:
                       type: object
                   type: object
                 type: array
+              operation:
+                description: "Operation related settings (typically do not affect\
+                  \ Envoy config, rather Kubernetes settings)"
+                properties:
+                  serviceAccount:
+                    description: Service account
+                    properties:
+                      name:
+                        description: Service account name
+                        type: string
+                      automountToken:
+                        description: Whether to automount the token for the service
+                          account (default true)
+                        type: boolean
+                    type: object
+                type: object
             type: object
           status:
             properties:
